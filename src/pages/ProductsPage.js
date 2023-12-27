@@ -1,0 +1,37 @@
+import React, {useEffect} from 'react'
+import styled from 'styled-components'
+import { Filters, ProductList, Sort, PageHero } from '../components'
+import { useFilterContext } from '../context/filter_context'
+
+const ProductsPage = () => {
+  const {sort} = useFilterContext();
+  return (
+    <main >
+       <PageHero title={['home','products']} />
+       <Wrapper className='section section-center'>
+        <div className="products">
+          <Filters />
+          <div> 
+            <Sort></Sort>
+            <ProductList />
+          </div>
+        </div> 
+       </Wrapper>  
+    </main>
+  )
+}
+
+const Wrapper = styled.div`
+  .products {
+    display: grid;
+    gap: 3rem 1.5rem;
+    margin: 4rem auto;
+  }
+  @media (min-width: 768px) {
+    .products {
+      grid-template-columns: 200px 1fr;
+    }
+  }
+`
+
+export default ProductsPage

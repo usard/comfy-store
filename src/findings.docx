@@ -1,0 +1,5 @@
+ if content of a tag is overflowing and u dont  want to overlow and show '...' at the end of the displayable text use text-overflow: ellipsis
+ use the title attribute of the tag to display the whole text in a box on hovering ellipsis text.
+i want to fetch the single product on routing to the single product page methods:
+ a) use useEffect in the particular page and invoke the function created locally.
+ b) if that function which fetches the product is used in multiple places then create it in the products context and it can be used anywhere.
