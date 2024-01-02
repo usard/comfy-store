@@ -13,7 +13,7 @@ import {
   PageHero,
 } from '../components'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 const SingleProductPage = () => {
   const {id} = useParams();
@@ -22,7 +22,8 @@ const SingleProductPage = () => {
   },[])
   const {single_product_loading:loading, single_product_error: error, singleProduct, getSingleProduct} = useProductsContext();
   console.log('single product :', singleProduct);
-  const [mainColor, setMainColor] = useState(singleProduct?.colors?.[0]);
+  // const [mainColor, setMainColor] = useState(singleProduct?.colors?.[0]);// unable to set color here dont know the reason , here i am getting the color using useEfect and using that color in the useState,but it shwoing useState of mainColor as undefined 
+  // console.log('main color in singleproduct page :', );
   if(loading) {
     return <Loading />
   }
@@ -30,7 +31,7 @@ const SingleProductPage = () => {
     return <Error />
   }
   else{
-    const {images, price, name, colors, company, reviews, stars, stock} = singleProduct; 
+    const {images, price, name, company, reviews, stars, stock} = singleProduct; 
     return (
        <Wrapper>
         <PageHero  title={['home', 'products', name]}/>
@@ -38,7 +39,7 @@ const SingleProductPage = () => {
           <ProductImages images={images} />
           <div>
               <h2>{name}</h2>
-              <Stars stars={4.3} reviews={reviews} />
+              <Stars stars={stars} reviews={reviews} />
               <p className='price' >{formatPrice(price)}</p>
               <p className='desc'>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                 Vero vitae dignissimos ab, aliquid doloremque perspiciatis cum veniam molestias 
@@ -59,19 +60,7 @@ const SingleProductPage = () => {
                 </p>
               </div>
               <hr />
-              <div className="colors">
-                <p className='info'>
-                  <span>colors</span>
-                   <span className='colors-container'>
-                    : {
-                      colors?.map((color)=> {
-                        return <button key={color} onClick={()=>setMainColor(color)} style={{backgroundColor: color}} className='color'></button>
-                      })
-                    }
-                   </span>
-                </p>
-              </div>
-              <AddToCart />
+              <AddToCart product={singleProduct} />
           </div>
         </div>
        </Wrapper>    

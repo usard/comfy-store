@@ -37,7 +37,7 @@ export const ProductsContextProvider = ({children}) => {
       const response = await axios.get(url);
       const data = response?.data;
       dispatch({type:GET_PRODUCTS_SUCCESS, payload:data})
-      console.log(' all products data from server :', data);
+      // console.log(' all products data from server :', data);
     }
     catch(error) {
       dispatch({type: GET_PRODUCTS_ERROR,})

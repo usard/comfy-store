@@ -5,7 +5,30 @@ import { Link } from 'react-router-dom'
 import { CartContent, PageHero } from '../components'
 
 const CartPage = () => {
-  return <h4>cart page</h4>
+  const {cart} = useCartContext();
+  // if(cart.length < 1) {
+    // return (
+    //   <Wrapper className='page-100'>
+    //     <div className='empty'>
+    //       <h2>
+    //         Cart is empty!
+    //       </h2>
+    //       <Link to='/products' className='btn'>Go to Products</Link>
+          
+    //     </div>  
+    //   </Wrapper>
+    // )
+  // }
+  return (
+    <main>
+      <PageHero title={["home", "cart"]}></PageHero>
+      <div className='page'>
+        <CartContent />
+
+      </div>
+
+    </main>
+  )
 }
 
 const Wrapper = styled.main`

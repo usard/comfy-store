@@ -2,19 +2,11 @@ import React,{useState} from 'react'
 import styled from 'styled-components'
 import { FaPlus, FaMinus } from 'react-icons/fa'
 
-const AmountButtons = () => {
-  const [count, setCount] = useState(1);
-  const increase = () => {
-  
-   setCount( (prev)=> prev+1);
-  }
-  const decrease = () => {
-    setCount((prev)=> prev > 1? prev-1: prev);
-  }
+const AmountButtons = ({stock, count, increase, decrease}) => {
   return <Wrapper>
-            <button type='button' className='' onClick={()=>increase()} >+</button>
+            <button type='button' disabled={count >= stock} className='' onClick={()=>increase()} ><FaPlus /></button>
             <h2>{count}</h2>
-            <button type='button' className='' onClick={()=>decrease()}>-</button>
+            <button type='button' disabled={count <= 1} className='' onClick={()=>decrease()}><FaMinus /></button>
           </Wrapper> 
 }
 

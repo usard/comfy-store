@@ -8,7 +8,7 @@ export const formatPrice = (price) => {
 }
 
 export const getUniqueValues = (arr, type) => {
-  console.log('unique values :', [...new Set(arr.map((product)=>product[type])), 'all'].sort());
+  // console.log('unique values :', [...new Set(arr.map((product)=>product[type])), 'all'].sort());
   if(type==='colors'){
     return [...new Set(...arr.map(( product)=> product[type]) )].sort();
   }

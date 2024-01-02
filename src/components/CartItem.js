@@ -2,10 +2,34 @@ import React from 'react'
 import styled from 'styled-components'
 import { formatPrice } from '../utils/helpers'
 import AmountButtons from './AmountButtons'
-import { FaTrash } from 'react-icons/fa'
+import { FaTrash} from 'react-icons/fa'
 import { useCartContext } from '../context/cart_context'
-const CartItem = () => {
-  return <h4>cart item</h4>
+const CartItem = ({id, image, name, price, mainColor, count, stock}) => {
+  const {removeFromCart, editItem} = useCartContext();
+  console.log('color  in cart item :', mainColor);
+  const increase = (id) => {
+    console.log('id of item to change count :', id);
+   editItem(id, count,'increase')
+  }
+  const decrease = (id) => {
+    editItem(id, count,'decrease');
+  }
+  return (
+          <Wrapper>
+            <div className='title'>
+              <img  src={image} alt="item_image" />
+              <div>
+                <h5 className='name'>{name}</h5>
+                <br />
+                <p className="color" > color: <span style={{backgroundColor:mainColor, borderRadius:'50%'}}></span></p>
+              </div>
+            </div>
+            <h5 className='price'>{formatPrice(price)}</h5>
+            <AmountButtons stock={stock} count={count} increase={()=>increase(id)} decrease={()=>decrease(id)}></AmountButtons>
+            <h5 className='subtotal'>{formatPrice(price*count)}</h5>
+            <button type='button' onClick={()=> removeFromCart(id)}><FaTrash /></button>
+          </Wrapper>
+         )
 }
 
 const Wrapper = styled.article`

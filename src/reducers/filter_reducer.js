@@ -51,7 +51,7 @@ const filter_reducer = (state, action) => {
   if(action.type === FILTER_PRODUCTS) {
     let temp_products = [...state.all_products];
     const {searchText, category, company, color, price, shipping} = state;
-    console.log('i am in reducer :', searchText, category, company, color, shipping);
+    // console.log('i am in reducer :', searchText, category, company, color, shipping);
     if(searchText) {
       // console.log("i am ok")
       temp_products = temp_products?.filter((product)=> product?.name?.toLowerCase()?.startsWith(searchText));
@@ -73,9 +73,6 @@ const filter_reducer = (state, action) => {
     if(shipping) {
       temp_products = temp_products?.filter((product)=> product?.shipping === true)
     }
-    // else {
-    //   temp_products = temp_products?.filter((product)=> product?.shipping === false )
-    // }
     return {...state, filtered_products: temp_products}
   }
   if(action.type === CLEAR_FILTERS) {

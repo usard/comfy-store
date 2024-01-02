@@ -5,14 +5,39 @@ import { FaCheck } from 'react-icons/fa'
 import { useCartContext } from '../context/cart_context'
 import AmountButtons from './AmountButtons'
 
-const AddToCart = () => {
+const AddToCart = ({product}) => {
+  const {id, stock, colors} = product;
+  const {addToCart} = useCartContext();
+  const [count, setCount] = useState(1);
+  const [mainColor, setMainColor] = useState(colors?.[0]);
+  const increase = () => {
+    console.log('count value in add to cart :', count);
+   setCount( (prev)=> prev >= stock ? prev: prev+1);
+  }
+  const decrease = () => {
+    setCount((prev)=> prev > 1? prev-1: prev);
+  }
+  // console.log('main color in add to cart page :', mainColor);
  
   return (
         <Wrapper>
+           <div className="colors">
+                <p className='info'>
+                  <span>colors</span>
+                   <span className='colors-container'>
+                    : {
+                      colors?.map((color)=> {
+                        return <button key={color} onClick={()=>setMainColor(color)} style={{backgroundColor: color}} className='color'>{mainColor === color ? <FaCheck /> : ''}</button>
+                      })
+                    }
+                   </span>
+                </p>
+              </div>
           <div className="btn-container">
-           <AmountButtons></AmountButtons>
+           <AmountButtons stock={stock} count={count} increase={increase} decrease={decrease}></AmountButtons>
+           {stock  && <Link to='/cart' className='btn' onClick={()=>  addToCart(id, count, mainColor, product)}>Add to Cart</Link>}
           </div>
-      </Wrapper>
+       </Wrapper>
     )
 }
 
